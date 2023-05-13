@@ -9,7 +9,6 @@ import com.ua.todo.model.Task;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-	
 	List<Task> findAllByUsersUserName(String userId);
 }
 
