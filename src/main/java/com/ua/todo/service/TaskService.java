@@ -14,6 +14,8 @@ import com.ua.todo.repo.StatusRepository;
 import com.ua.todo.repo.TaskRepository;
 import com.ua.todo.repo.UsersRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class TaskService {
 	
@@ -25,7 +27,7 @@ public class TaskService {
 	private StatusRepository statusRepository;
 	
 	public List<Task> getAllTasks(String userId) {
-		return taskRepository.findAllByUsersUserName(userId);
+		return taskRepository.findAllByUsersUserEmail(userId);
 	}
 	
 	public Task createTask(Task task) {
@@ -35,8 +37,13 @@ public class TaskService {
 	public Category addCategory(Category category){
 		return categoryRepository.save(category);
 	}
-	public Status addStatus(Status status){
-		return statusRepository.save(status);
+	@Transactional
+	public void updateTaskStatusByTaskId(long id, long status_id){
+		taskRepository.updateTaskStatusbyId(id, status_id);
+	}
+	
+	public Task getTaskById(long id){
+		return taskRepository.getReferenceById(id);
 	}
 
 }

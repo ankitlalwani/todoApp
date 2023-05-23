@@ -7,4 +7,5 @@ import com.ua.todo.model.Status;
 
 @Repository
 public interface StatusRepository extends JpaRepository<Status, Long> {
+	Status getStatusByName(String statusName);
 }
